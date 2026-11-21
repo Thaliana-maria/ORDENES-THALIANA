@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: marketplace-usc-ordenes
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: URL_INVENTARIO
+        sync: false
+      - key: INVENTARIO_RESERVE_PATH
+        value: /api/inventario/reservar
+      - key: INVENTARIO_CONFIRM_PATH
+        value: /api/inventario/confirmar
+      - key: INVENTARIO_ADJUSTMENT_PATH
+        value: /api/inventario/productos/{producto_id}/movimientos
+      - key: URL_NOTIFICACIONES
+        value: https://marketplace-usc-notificaciones.onrender.com
+      - key: URL_CONTABILIDAD
+        value: https://marketplace-usc-contabilidad.onrender.com
+      - key: URL_SEGUIMIENTO
+        value: https://marketplace-usc-seguimiento.onrender.com
+      - key: AUTH_URL
+        value: https://xmrlazemifmepyahqsrz.supabase.co/auth/v1
+      - key: JWKS_URL
+        value: https://xmrlazemifmepyahqsrz.supabase.co/auth/v1/.well-known/jwks.json
+      - key: JWT_ISSUER
+        value: https://xmrlazemifmepyahqsrz.supabase.co/auth/v1
+      - key: JWT_AUDIENCE
+        value: authenticated
+      - key: ALLOW_DEV_TOKEN
+        value: "false"
